@@ -20,6 +20,53 @@
           flavor = "tap-preferred";
           bindings = <&kp>, <&kp>;
       };
+
+      // Spanish accents through the macOS dead keys: Option+e then a vowel
+      // gives the acute vowel, Option+n then n gives ñ.  Left Alt on purpose:
+      // Emacs keeps Left Option for macOS and uses Right Option as Meta.
+      acute_a: acute_a {
+          compatible = "zmk,behavior-macro";
+          #binding-cells = <0>;
+          display-name = "Acute A";
+          bindings = <&kp LA(E) &kp A>;
+      };
+      acute_e: acute_e {
+          compatible = "zmk,behavior-macro";
+          #binding-cells = <0>;
+          display-name = "Acute E";
+          bindings = <&kp LA(E) &kp E>;
+      };
+      acute_i: acute_i {
+          compatible = "zmk,behavior-macro";
+          #binding-cells = <0>;
+          display-name = "Acute I";
+          bindings = <&kp LA(E) &kp I>;
+      };
+      acute_o: acute_o {
+          compatible = "zmk,behavior-macro";
+          #binding-cells = <0>;
+          display-name = "Acute O";
+          bindings = <&kp LA(E) &kp O>;
+      };
+      acute_u: acute_u {
+          compatible = "zmk,behavior-macro";
+          #binding-cells = <0>;
+          display-name = "Acute U";
+          bindings = <&kp LA(E) &kp U>;
+      };
+      tilde_n: tilde_n {
+          compatible = "zmk,behavior-macro";
+          #binding-cells = <0>;
+          display-name = "Tilde N";
+          bindings = <&kp LA(N) &kp N>;
+      };
+      // Defined in Clique (Custom Macro 7) but not bound to any key there.
+      acute_a_upper: acute_a_upper {
+          compatible = "zmk,behavior-macro";
+          #binding-cells = <0>;
+          display-name = "Acute A (upper)";
+          bindings = <&kp LA(E) &kp LS(A)>;
+      };
     };
 
   keymap {
@@ -28,11 +75,11 @@
     default_layer {
       display-name = "Base";
       bindings = <
-        &kp EQUAL &kp N1    &kp N2   &kp N3   &kp N4     &kp N5 &tog 1                                                           &mo 3 &kp N6 &kp N7 &kp N8    &kp N9   &kp N0   &kp MINUS
-        &kp TAB   &kp Q     &kp W    &kp E    &kp R      &kp T  &none                                                            &none &kp Y  &kp U  &kp I     &kp O    &kp P    &kp BSLH
-        &kp ESC   &kp A     &kp S    &kp D    &kp F      &kp G  &none           &kp LCTRL &kp LALT &kp LGUI  &kp RCTRL           &none &kp H  &kp J  &kp K     &kp L    &kp SEMI &kp SQT
-        &kp LSHFT &kp Z     &kp X    &kp C    &kp V      &kp B                            &kp HOME &kp PG_UP                           &kp N  &kp M  &kp COMMA &kp DOT  &kp FSLH &kp RSHFT
-        &mo 2     &kp GRAVE &kp CAPS &kp LEFT &kp RIGHT                &kp BSPC &kp DEL   &kp END  &kp PG_DN &kp ENTER &kp SPACE              &kp UP &kp DOWN  &kp LBKT &kp RBKT &mo 2
+        &kp BSLH  &kp N1    &kp N2    &kp N3    &kp N4    &kp N5    &tog 1                                                                            &mo 3     &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &kp EQUAL
+        &kp TAB   &kp SQT   &kp COMMA &kp DOT   &kp P     &kp Y     &kp KP_N1                                                                         &kp KP_N3 &kp F     &kp G     &kp C     &kp R     &kp L     &kp FSLH
+        &kp ESC   &kp A     &kp O     &kp E     &kp U     &kp I     &kp KP_N2             &kp LCTRL     &kp LALT      &kp RGUI  &kp RALT              &kp KP_N4 &kp D     &kp H     &kp T     &kp N     &kp S     &kp MINUS
+        &kp LSHFT &kp SEMI  &kp Q     &kp J     &kp K     &kp X                                         &kp HOME      &kp PG_UP                                 &kp B     &kp M     &kp W     &kp V     &kp Z     &kp RSHFT
+        &kp LCTRL &kp GRAVE &kp CAPS  &kp LBKT  &kp RBKT                      &mt LGUI BSPC &mt RALT DEL  &mo 2         &kp ENTER &kp RCTRL &kp SPACE                     &kp LEFT  &kp UP    &kp DOWN  &kp RIGHT &mo 2
       >;
     };
     keypad {
@@ -48,11 +95,11 @@
     fn {
       display-name = "Fn";
       bindings = <
-        &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &tog 1                                           &mo 3 &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12
-        &trans &trans &trans &trans &trans &trans  &none                                           &none &trans &trans &trans &trans  &trans  &trans
-        &trans &trans &trans &trans &trans &trans  &none        &trans &trans &trans &trans        &none &trans &trans &trans &trans  &trans  &trans
-        &trans &trans &trans &trans &trans &trans                      &trans &trans                     &trans &trans &trans &trans  &trans  &trans
-        &trans &trans &trans &trans &trans               &trans &trans &trans &trans &trans &trans              &trans &trans &trans  &trans  &trans
+        &kp F1 &kp F2    &kp F3    &kp F4    &kp F5    &kp F6    &tog 1                                           &mo 3  &kp F7 &kp F8 &kp F9 &kp F10  &kp F11 &kp F12
+        &trans &trans    &trans    &trans    &trans    &trans    &none                                            &none  &trans &trans &trans &trans   &trans  &trans
+        &trans &acute_a  &acute_o  &acute_e  &acute_u  &acute_i  &none        &trans &trans &trans &trans         &none  &trans &trans &trans &tilde_n &trans  &trans
+        &trans &trans    &trans    &trans    &trans    &trans                       &trans &trans                        &trans &trans &trans &trans   &trans  &trans
+        &trans &trans    &trans    &trans    &trans                       &trans &trans &trans &trans &trans &trans              &trans &trans &trans   &trans  &trans
       >;
     };
     mod {
@@ -65,23 +112,23 @@
         &none &none        &none        &none        &none                                       &none &none &none &none      &bl BL_TOG &rgb_ug RGB_TOG                                     &bl BL_INC   &bl BL_DEC   &none &none &none
       >;
     };
-    extra1 { 
-      display-name = "Red";    
+    extra1 {
+      display-name = "Red";
       status = "reserved";
     };
 
-    extra2 { 
-      display-name = "Purple";    
+    extra2 {
+      display-name = "Purple";
       status = "reserved";
     };
 
-    extra3 { 
-      display-name = "Cyan";    
+    extra3 {
+      display-name = "Cyan";
       status = "reserved";
     };
 
-    extra4 { 
-      display-name = "Yellow";    
+    extra4 {
+      display-name = "Yellow";
       status = "reserved";
     };
   };
