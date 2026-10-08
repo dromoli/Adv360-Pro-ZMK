@@ -24,11 +24,29 @@
       // Spanish accents through the macOS dead keys: Option+e then a vowel
       // gives the acute vowel, Option+n then n gives ñ.  Left Alt on purpose:
       // Emacs keeps Left Option for macOS and uses Right Option as Meta.
+      //
+      // es_* is what the Fn layer binds: plain gives the lowercase macro,
+      // Shift gives the uppercase one.  The mod-morph hides the held Shift
+      // while the macro runs, otherwise macOS would see Shift+Option+e, which
+      // is not the dead key; the uppercase macro adds Shift to the vowel itself.
       acute_a: acute_a {
           compatible = "zmk,behavior-macro";
           #binding-cells = <0>;
           display-name = "Acute A";
           bindings = <&kp LA(E) &kp A>;
+      };
+      acute_a_upper: acute_a_upper {
+          compatible = "zmk,behavior-macro";
+          #binding-cells = <0>;
+          display-name = "Acute A (upper)";
+          bindings = <&kp LA(E) &kp LS(A)>;
+      };
+      es_a: es_a {
+          compatible = "zmk,behavior-mod-morph";
+          #binding-cells = <0>;
+          display-name = "ES A";
+          bindings = <&acute_a>, <&acute_a_upper>;
+          mods = <(MOD_LSFT|MOD_RSFT)>;
       };
       acute_e: acute_e {
           compatible = "zmk,behavior-macro";
@@ -36,11 +54,37 @@
           display-name = "Acute E";
           bindings = <&kp LA(E) &kp E>;
       };
+      acute_e_upper: acute_e_upper {
+          compatible = "zmk,behavior-macro";
+          #binding-cells = <0>;
+          display-name = "Acute E (upper)";
+          bindings = <&kp LA(E) &kp LS(E)>;
+      };
+      es_e: es_e {
+          compatible = "zmk,behavior-mod-morph";
+          #binding-cells = <0>;
+          display-name = "ES E";
+          bindings = <&acute_e>, <&acute_e_upper>;
+          mods = <(MOD_LSFT|MOD_RSFT)>;
+      };
       acute_i: acute_i {
           compatible = "zmk,behavior-macro";
           #binding-cells = <0>;
           display-name = "Acute I";
           bindings = <&kp LA(E) &kp I>;
+      };
+      acute_i_upper: acute_i_upper {
+          compatible = "zmk,behavior-macro";
+          #binding-cells = <0>;
+          display-name = "Acute I (upper)";
+          bindings = <&kp LA(E) &kp LS(I)>;
+      };
+      es_i: es_i {
+          compatible = "zmk,behavior-mod-morph";
+          #binding-cells = <0>;
+          display-name = "ES I";
+          bindings = <&acute_i>, <&acute_i_upper>;
+          mods = <(MOD_LSFT|MOD_RSFT)>;
       };
       acute_o: acute_o {
           compatible = "zmk,behavior-macro";
@@ -48,11 +92,37 @@
           display-name = "Acute O";
           bindings = <&kp LA(E) &kp O>;
       };
+      acute_o_upper: acute_o_upper {
+          compatible = "zmk,behavior-macro";
+          #binding-cells = <0>;
+          display-name = "Acute O (upper)";
+          bindings = <&kp LA(E) &kp LS(O)>;
+      };
+      es_o: es_o {
+          compatible = "zmk,behavior-mod-morph";
+          #binding-cells = <0>;
+          display-name = "ES O";
+          bindings = <&acute_o>, <&acute_o_upper>;
+          mods = <(MOD_LSFT|MOD_RSFT)>;
+      };
       acute_u: acute_u {
           compatible = "zmk,behavior-macro";
           #binding-cells = <0>;
           display-name = "Acute U";
           bindings = <&kp LA(E) &kp U>;
+      };
+      acute_u_upper: acute_u_upper {
+          compatible = "zmk,behavior-macro";
+          #binding-cells = <0>;
+          display-name = "Acute U (upper)";
+          bindings = <&kp LA(E) &kp LS(U)>;
+      };
+      es_u: es_u {
+          compatible = "zmk,behavior-mod-morph";
+          #binding-cells = <0>;
+          display-name = "ES U";
+          bindings = <&acute_u>, <&acute_u_upper>;
+          mods = <(MOD_LSFT|MOD_RSFT)>;
       };
       tilde_n: tilde_n {
           compatible = "zmk,behavior-macro";
@@ -60,12 +130,18 @@
           display-name = "Tilde N";
           bindings = <&kp LA(N) &kp N>;
       };
-      // Defined in Clique (Custom Macro 7) but not bound to any key there.
-      acute_a_upper: acute_a_upper {
+      tilde_n_upper: tilde_n_upper {
           compatible = "zmk,behavior-macro";
           #binding-cells = <0>;
-          display-name = "Acute A (upper)";
-          bindings = <&kp LA(E) &kp LS(A)>;
+          display-name = "Tilde N (upper)";
+          bindings = <&kp LA(N) &kp LS(N)>;
+      };
+      es_n: es_n {
+          compatible = "zmk,behavior-mod-morph";
+          #binding-cells = <0>;
+          display-name = "ES N";
+          bindings = <&tilde_n>, <&tilde_n_upper>;
+          mods = <(MOD_LSFT|MOD_RSFT)>;
       };
     };
 
@@ -97,7 +173,7 @@
       bindings = <
         &kp F1 &kp F2    &kp F3    &kp F4    &kp F5    &kp F6    &tog 1                                           &mo 3  &kp F7 &kp F8 &kp F9 &kp F10  &kp F11 &kp F12
         &trans &trans    &trans    &trans    &trans    &trans    &none                                            &none  &trans &trans &trans &trans   &trans  &trans
-        &trans &acute_a  &acute_o  &acute_e  &acute_u  &acute_i  &none        &trans &trans &trans &trans         &none  &trans &trans &trans &tilde_n &trans  &trans
+        &trans &es_a     &es_o     &es_e     &es_u     &es_i     &none        &trans &trans &trans &trans         &none  &trans &trans &trans &es_n    &trans  &trans
         &trans &trans    &trans    &trans    &trans    &trans                       &trans &trans                        &trans &trans &trans &trans   &trans  &trans
         &trans &trans    &trans    &trans    &trans                       &trans &trans &trans &trans &trans &trans              &trans &trans &trans   &trans  &trans
       >;
